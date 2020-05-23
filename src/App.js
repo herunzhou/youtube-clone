@@ -1,16 +1,24 @@
 import React from 'react';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { SearchBar, VideoList, VideoDetail } from './components';
 
 import youtube from './api/youtube';
+
 
 class App extends React.Component {
     state = {
         videos: [],
         selectedVideo: null,
     }
+
+    theme = createMuiTheme({
+        palette: {
+            type: "light",
+        }
+    })
 
     componentDidMount() {
         this.handleSubmit('javascript')
@@ -38,22 +46,25 @@ class App extends React.Component {
     render() {
         const { selectedVideo, videos } = this.state;
         return (
-            <Grid justify="center" container spacing={10}>
-                <Grid item xs={12}>
-                    <Grid container spacing={10}>
+            <ThemeProvider theme={this.theme}>
+                <Paper>
+                    <Grid justify="center" container spacing={10}>
                         <Grid item xs={12}>
-                            <SearchBar onFormSubmit={this.handleSubmit} />
+                            <Grid container spacing={10}>
+                                <Grid item xs={12}>
+                                    <SearchBar onFormSubmit={this.handleSubmit} />
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <VideoDetail video={selectedVideo} />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <VideoList videos={videos} onVideoSelect={this.onVideoSelect}></VideoList>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={8}>
-                            <VideoDetail video={selectedVideo} />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <VideoList videos={videos} onVideoSelect={this.onVideoSelect}></VideoList>
-                        </Grid>
-
                     </Grid>
-                </Grid>
-            </Grid>
+                </Paper>
+            </ThemeProvider>
         )
     }
 }

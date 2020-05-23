@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Paper, Typography } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 
 const VideoDetail = ({ video }) => {
