@@ -29,7 +29,7 @@ class App extends React.Component {
             params: {
                 part: 'snippet',
                 maxResults: 5,
-                key: "AIzaSyBEK1HFeYd9WXp6jurD0E2WIxww5c36ayU",
+                key: "",
                 q: searchTerm,
             }
         })
