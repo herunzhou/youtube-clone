@@ -16,12 +16,12 @@ class App extends React.Component {
 
     theme = createMuiTheme({
         palette: {
-            type: "light",
+            type: "dark",
         }
     })
 
     componentDidMount() {
-        this.handleSubmit('javascript')
+        this.handleSubmit('javascript loops')
     }
 
     handleSubmit = async (searchTerm) => {
@@ -47,7 +47,7 @@ class App extends React.Component {
         const { selectedVideo, videos } = this.state;
         return (
             <ThemeProvider theme={this.theme}>
-                <Paper>
+                <Paper style={{ backgroundColor: "#212121" }}>
                     <Grid justify="center" container spacing={10}>
                         <Grid item xs={12}>
                             <Grid container spacing={10}>
