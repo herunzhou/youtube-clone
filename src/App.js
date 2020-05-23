@@ -8,18 +8,20 @@ import youtube from './api/youtube';
 
 class App extends React.Component {
     state = {
-        video: [],
+        videos: [],
         selectedVideo: null,
     }
 
-
+    componentDidMount() {
+        this.handleSubmit('javascript')
+    }
 
     handleSubmit = async (searchTerm) => {
         const response = await youtube.get('search', {
             params: {
                 part: 'snippet',
                 maxResults: 5,
-                key: "[API KEY]",
+                key: "AIzaSyBEK1HFeYd9WXp6jurD0E2WIxww5c36ayU",
                 q: searchTerm,
             }
         })
@@ -27,8 +29,14 @@ class App extends React.Component {
         this.setState({ videos: response.data.items, selectedVideo: response.data.items[0] })
     }
 
+    onVideoSelect = (video) => {
+        this.setState({
+            selectedVideo: video,
+        })
+    }
+
     render() {
-        const { selectedVideo } = this.state;
+        const { selectedVideo, videos } = this.state;
         return (
             <Grid justify="center" container spacing={10}>
                 <Grid item xs={12}>
@@ -40,7 +48,7 @@ class App extends React.Component {
                             <VideoDetail video={selectedVideo} />
                         </Grid>
                         <Grid item xs={4}>
-                            {/* Video List*/}
+                            <VideoList videos={videos} onVideoSelect={this.onVideoSelect}></VideoList>
                         </Grid>
 
                     </Grid>
